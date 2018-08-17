@@ -1,0 +1,23 @@
+FROM centos:6
+
+ENV ANSIBLE_DIR /ansible
+WORKDIR $ANSIBLE_DIR
+
+RUN echo "root:Ansible!" | chpasswd
+
+RUN echo Update the image with the latest packages && \
+	yum update -y && \
+	echo Install epel-release && \
+	yum install -y epel-release && \
+	echo Install ansible and other packages && \
+	yum install -y ansible python2-ndg_httpsclient python-pyasn1 pyOpenSSL python-urllib3 \
+	  wget openssh-clients openssh-server iputils git sudo && \
+	yum clean all
+
+COPY ansible.cfg $ANSIBLE_DIR/
+COPY inventory.ini $ANSIBLE_DIR/
+COPY *.yml $ANSIBLE_DIR/
+
+RUN ansible-galaxy install -r requirements.yml
+
+CMD ["/bin/bash"]

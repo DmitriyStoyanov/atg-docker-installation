@@ -1,0 +1,7 @@
+- name: "Install java"
+  hosts: atg
+
+  roles:
+    - role: "lean_delivery.java"
+      transport: "web"
+      transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-java/jdk-7u191-linux-x64.tar.gz"

@@ -1,0 +1,22 @@
+- name: "Install Java and Jboss from web"
+  hosts: atg
+
+  roles:
+    - role: "lean_delivery.java"
+      transport: "web"
+      transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-java/jdk-7u191-linux-x64.tar.gz"
+    - role: "lean_delivery.jboss"
+      transport: "web"
+      transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
+
+- name: "Install ATG 11.2 from web"
+  hosts: atg.docker-network
+
+  roles:
+    - role: lean_delivery.atg_platform
+      transport: "web"
+      transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/commerce/ATG11.2/ATG11.2/V78217-01.zip"
+
+  vars:
+    atg_version: "11.2"
+    dynamo_root: "/opt/atg/ATG{{ atg_version }}"

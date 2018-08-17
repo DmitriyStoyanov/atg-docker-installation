@@ -1,0 +1,7 @@
+- name: "Install Jboss from web"
+  hosts: atg
+
+  roles:
+    - role: "lean_delivery.jboss"
+      transport: "web"
+      transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
