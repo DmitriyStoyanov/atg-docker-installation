@@ -7,4 +7,4 @@
 # Install lean_delivery.atg_platform_patching from Ansible Galaxy
 - src: lean_delivery.atg_platform_patching
 # Install lean_delivery/atg_csc from Ansible Galaxy
-- src: lean_delivery.atg_csc
+#- src: lean_delivery.atg_csc

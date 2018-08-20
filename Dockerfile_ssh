@@ -1,12 +1,12 @@
 FROM centos:6
 
-RUN echo "root:Ssh!" | chpasswd
-
 RUN echo Update the image with the latest packages && \
 	yum update -y && \
 	echo Install OpenSSH and sudo && \
 	yum install -y openssh-clients openssh-server sudo && \
 	yum clean all
+
+RUN echo "root:Ssh!" | chpasswd
 
 RUN service sshd start
 CMD ["/usr/sbin/sshd", "-D"]

@@ -14,6 +14,12 @@
 - name: "Install ATG 11.2.0.2.1 from web"
   hosts: atg
 
+  pre_tasks:
+  - name: "Install easy_install"
+    package:
+      name: "python-setuptools"
+      state: "present"
+
   roles:
     - role: lean_delivery.atg_platform
       transport: "web"
