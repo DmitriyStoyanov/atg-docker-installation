@@ -1,5 +1,5 @@
 ---
-- hosts: atg.docker-network
+- hosts: atg
   tasks:
     - name: "Install python-setuptools"
       package:

@@ -1,5 +1,7 @@
 - name: "Install Java and Jboss from web"
-  hosts: atg
+  hosts:
+    - atg
+    - jboss
 
   roles:
     - role: "lean_delivery.java"
@@ -10,7 +12,7 @@
       transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
 
 - name: "Install ATG 11.2.0.2.1 from web"
-  hosts: atg.docker-network
+  hosts: atg
 
   roles:
     - role: lean_delivery.atg_platform

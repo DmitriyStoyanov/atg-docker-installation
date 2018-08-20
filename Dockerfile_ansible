@@ -14,10 +14,8 @@ RUN echo Update the image with the latest packages && \
 	  wget openssh-clients openssh-server iputils git sudo && \
 	yum clean all
 
-COPY ansible.cfg $ANSIBLE_DIR/
-COPY inventory.ini $ANSIBLE_DIR/
-COPY *.yml $ANSIBLE_DIR/
-
+COPY ansible.cfg inventory.ini requirements.yml $ANSIBLE_DIR/
 RUN ansible-galaxy install -r requirements.yml
+COPY *.yml $ANSIBLE_DIR/
 
 CMD ["/bin/bash"]

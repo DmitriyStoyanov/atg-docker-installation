@@ -1,0 +1,1655 @@
+//#GROOVY 1.0
+builder.cim {
+  task(atg.cim.productconfig.productselector.ProductSelectionContextTask) {
+    selectedProductIdList "publishing,endeca,commerce,REST,siteadmin"
+    selectedAddOnIdList "endeca,lock,prodLock,switchingdatasource,REST,dcsui_siteadmin_versioned,indexBySkuEndeca,publishing_management,publishing_switchingdatasource"
+  }
+  task(atg.cim.productconfig.appserver.AppServerSelectTask) {
+    type "JBoss"
+  }
+  task(atg.cim.productconfig.appserver.AppServerPathTask) {
+    path "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.appserver.AppServerSelectionPersistenceTask) {
+  }
+  task(atg.cim.security.opss.OpssInitializationTask) {
+  }
+  task(atg.cim.productconfig.opss.OpssWalletLocationTask) {
+    path "/opt/atg/ATG11.2/home/../home/security/"
+  }
+  task(atg.cim.productconfig.opss.OpssRestSecurityCredentialTask) {
+    mapName "requestCredentialMap"
+    keyName "key"
+  }
+  task(atg.cim.productconfig.opss.OpssWorkbenchLoginCredentialTask) {
+    mapName "endecaToolsAndFrameworks"
+    keyName "ifcr"
+  }
+  task(atg.cim.productconfig.opss.OpssCopyFilesForDeployment) {
+  }
+  task(atg.cim.productconfig.opss.DeployOpssFilesLocalTask) {
+  }
+  task(atg.cim.database.DatasourcePropertiesTask) {
+    key "management"
+    alias "management"
+    databaseType "oraclethin"
+    username "PUB"
+    password "PUB"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    driverPath "/opt/ojdbc6.jar"
+    jndiName "ATGPublishingDS"
+  }
+  task(atg.cim.database.CreateSchemaTask) {
+    cimDatasourceId "management"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=PUB,alias=management,jndiName=ATGPublishingDS,databaseName=xe,hostname=oracle.docker-network,password=PUB"
+  }
+  task(atg.cim.database.AccountPasswordTask) {
+    password "Merch123"
+    pwdHasherCompPathCode "merchandisingPwdHasherCompPath"
+    salt "merchandising"
+    importPath "/DCS-UI/Versioned/install/data/users.xml"
+    persistKey "merchandisingPassword"
+  }
+  task(atg.cim.database.AccountPasswordTask) {
+    password "Admin123"
+    pwdHasherCompPathCode "adminPwdHasherCompPath"
+    salt "admin"
+    importPath "/WebUI/install/data/profile.xml"
+    persistKey "adminPublishingPassword"
+  }
+  task(atg.cim.database.ReplacePasswordTask) {
+  }
+  task(atg.cim.database.ImportDataTask) {
+    cimDatasourceId "management"
+  }
+  task(atg.cim.database.ReplacePasswordCleanupTask) {
+  }
+  task(atg.cim.database.DatasourcePropertiesTask) {
+    key "switchingCore"
+    alias "switchingCore"
+    databaseType "oraclethin"
+    username "CORE"
+    password "CORE"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    driverPath "/opt/ojdbc6.jar"
+    jndiName "ATGProductionDS"
+  }
+  task(atg.cim.database.CreateSchemaTask) {
+    cimDatasourceId "switchingCore"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=CORE,alias=switchingCore,jndiName=ATGProductionDS,databaseName=xe,hostname=oracle.docker-network,password=CORE"
+  }
+  task(atg.cim.database.ReplacePasswordTask) {
+  }
+  task(atg.cim.database.ImportDataTask) {
+    cimDatasourceId "switchingCore"
+  }
+  task(atg.cim.database.ReplacePasswordCleanupTask) {
+  }
+  task(atg.cim.database.DatasourcePropertiesTask) {
+    key "switchingA"
+    alias "switchingA"
+    databaseType "oraclethin"
+    username "CATA"
+    password "CATA"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    driverPath "/opt/ojdbc6.jar"
+    jndiName "ATGSwitchingDS_A"
+  }
+  task(atg.cim.database.CreateSchemaTask) {
+    cimDatasourceId "switchingA"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=CATA,alias=switchingA,jndiName=ATGSwitchingDS_A,databaseName=xe,hostname=oracle.docker-network,password=CATA"
+  }
+  task(atg.cim.database.ReplacePasswordTask) {
+  }
+  task(atg.cim.database.ImportDataTask) {
+    cimDatasourceId "switchingA"
+  }
+  task(atg.cim.database.ReplacePasswordCleanupTask) {
+  }
+  task(atg.cim.database.DatasourcePropertiesTask) {
+    key "switchingB"
+    alias "switchingB"
+    databaseType "oraclethin"
+    username "CATB"
+    password "CATB"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    driverPath "/opt/ojdbc6.jar"
+    jndiName "ATGSwitchingDS_B"
+  }
+  task(atg.cim.database.CreateSchemaTask) {
+    cimDatasourceId "switchingB"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=CATB,alias=switchingB,jndiName=ATGSwitchingDS_B,databaseName=xe,hostname=oracle.docker-network,password=CATB"
+  }
+  task(atg.cim.database.DropSchemaTask) {
+    cimDatasourceId "switchingB"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=CATB,alias=switchingB,jndiName=ATGSwitchingDS_B,databaseName=xe,hostname=oracle.docker-network,password=CATB"
+  }
+  task(atg.cim.database.CreateSchemaTask) {
+    cimDatasourceId "switchingB"
+    datasourceProperties "url=jdbc:oracle:thin:@oracle.docker-network:1521:xe,port=1521,databaseType=oraclethin,driverPathsAsString=/opt/ojdbc6.jar,username=CATB,alias=switchingB,jndiName=ATGSwitchingDS_B,databaseName=xe,hostname=oracle.docker-network,password=CATB"
+  }
+  task(atg.cim.database.ReplacePasswordTask) {
+  }
+  task(atg.cim.database.ImportDataTask) {
+    cimDatasourceId "switchingB"
+  }
+  task(atg.cim.database.ReplacePasswordCleanupTask) {
+  }
+  task(atg.cim.worker.common.PropertyFileClearPersistanceTask) {
+    serverInstanceTypeId "lock"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "lock1"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    property(name:"siteHttpServerPort^",value: "/atg/dynamo/Configuration.httpPort")
+    rmiPort "8860"
+    drpPort "8850"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "false"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/scenario/ScenarioManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/dynamo/service/ServerLockManager")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    port "9012"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/service/ServerLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    adminContextProviders- "SiteAdminContextProvider"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/admin/context/AdminContextManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    interceptors- "VirtualContextRootInterceptor,WebAppLayeringInterceptor"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/servlet/dafpipeline/TailPipelineServlet.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "registry/PipelineRegistry"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "SitemapRepository,SitemapGeneratorService,SitemapWriterService"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/sitemap/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"preSessionServlet^",value: "/Constants.Null")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/servlet/pipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "SiteContextPipelineServlet,/atg/dynamo/servlet/dafpipeline/SiteSessionEventTrigger,/atg/dynamo/servlet/pipeline/SiteSessionEventTrigger,/atg/dynamo/servlet/pipeline/SiteContextPipelineServlet,SiteRepository"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/multisite/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"preSessionServlet^",value: "/Constants.Null")
+    staticServlet "/atg/dynamo/servlet/dafpipeline/static/TailPipelineServlet"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock1/localconfig/atg/dynamo/servlet/dafpipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "lock_production"
+    serverInstanceName "lock1"
+    serverInstanceTypeId "lock"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "lock2"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    property(name:"siteHttpServerPort^",value: "/atg/dynamo/Configuration.httpPort")
+    rmiPort "8860"
+    drpPort "8850"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "false"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/scenario/ScenarioManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/dynamo/service/ServerLockManager")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    port "9012"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/service/ServerLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    adminContextProviders- "SiteAdminContextProvider"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/admin/context/AdminContextManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    interceptors- "VirtualContextRootInterceptor,WebAppLayeringInterceptor"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/servlet/dafpipeline/TailPipelineServlet.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "registry/PipelineRegistry"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "SitemapRepository,SitemapGeneratorService,SitemapWriterService"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/sitemap/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"preSessionServlet^",value: "/Constants.Null")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/servlet/pipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    initialServices- "SiteContextPipelineServlet,/atg/dynamo/servlet/dafpipeline/SiteSessionEventTrigger,/atg/dynamo/servlet/pipeline/SiteSessionEventTrigger,/atg/dynamo/servlet/pipeline/SiteContextPipelineServlet,SiteRepository"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/multisite/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"preSessionServlet^",value: "/Constants.Null")
+    staticServlet "/atg/dynamo/servlet/dafpipeline/static/TailPipelineServlet"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/lock2/localconfig/atg/dynamo/servlet/dafpipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "lock_production"
+    serverInstanceName "lock2"
+    serverInstanceTypeId "lock"
+  }
+  task(atg.cim.worker.common.PropertyFileClearPersistanceTask) {
+    serverInstanceTypeId "management"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "bcc"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    siteHttpServerPort "8080"
+    rmiPort "8860"
+    drpPort "8850"
+    fileDeploymentPort "8810"
+    fileSychronizationDeploymentPort "8815"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/dynamo/service/ServerLockManager")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    port "9010"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/ServerLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    lockServerAddress "localhost"
+    lockServerPort "9010"
+    useLockServer "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/ClientLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/content/ContentManagementRepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"#targetName",value: "Production")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/content/search/MediaContentOutputConfig.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/repository/dynamic/DynamicMetadataRepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGPublishingDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    CASHostName("endeca.docker-network")
+    EACPort("8888")
+    EACHostName("endeca.docker-network")
+    CASPort("8500")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/endeca/index/IndexingApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    locales "en,en_US"
+    languageMap "english=en"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/search/config/LanguageDimensionService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/commerce/locations/LocationRepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/commerce/pricing/priceLists/PriceLists_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/commerce/catalog/ProductCatalog_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    clusterName "management"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/ClusterName.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_A")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"#targetName",value: "Production")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/commerce/search/ProductCatalogOutputConfig.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_B")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/userprofiling/PersonalizationRepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource_production"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/jdbc/JTDataSource_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    defaultMdexPort "15000"
+    defaultMdexHostName "endeca-mdex1.docker-network"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/endeca/assembler/AssemblerApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/server/SQLRepositoryEventServer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    workbenchPort "8006"
+    workbenchHostName "endeca.docker-network"
+    baseApplicationName "ATG"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/endeca/ApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"#targetName",value: "Production")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/commerce/endeca/index/CategoryToDimensionOutputConfig.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/multisite/SiteRepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/seo/SEORepository_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    lockServerPort "9012"
+    useLockServer "true"
+    lockServerAddress "lock1.docker-network"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/dynamo/service/ClientLockManager_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"#targetName",value: "Production")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/bcc/localconfig/atg/content/search/ArticleOutputConfig.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "management_lock"
+    serverInstanceName "bcc"
+    serverInstanceTypeId "management"
+  }
+  task(atg.cim.worker.common.PropertyFileClearPersistanceTask) {
+    serverInstanceTypeId "production"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "store01"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    siteHttpServerPort "8080"
+    rmiPort "8860"
+    drpPort "8850"
+    fileDeploymentPort "8810"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    useLockServer "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/ClientLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    useLockServer "true"
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/ClientLockManager_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/repository/dynamic/DynamicMetadataRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/commerce/pricing/priceLists/PriceLists.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/commerce/catalog/ProductCatalog.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"updateProductCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductCatalogsSQL")
+    property(name:"updateProductParentCategoriesForCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductParentCategoriesForCatalogsSQL")
+    property(name:"truncateDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateDynamicProductsSQL")
+    property(name:"invalidatedSKUAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedSKUAssetIdsCountSQL")
+    property(name:"categoryChildSkusSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusSQL")
+    property(name:"prodsToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.prodsToInvalidateSQL")
+    property(name:"categoryChildProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsSQL")
+    property(name:"updateSkuCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuCatalogsSQL")
+    property(name:"skusToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.skusToInvalidateSQL")
+    property(name:"updateProductSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductSitesSQL")
+    property(name:"insertDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.insertDynamicProductsSQL")
+    property(name:"updateProductAncestorCategoriesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductAncestorCategoriesSQL")
+    alwaysWalkTree "false"
+    property(name:"categoryChildSkusWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusWithDynamicSQL")
+    property(name:"categoryChildProductsWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsWithDynamicSQL")
+    property(name:"updateSkuSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuSitesSQL")
+    property(name:"invalidatedProductAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedProductAssetIdsCountSQL")
+    property(name:"truncateInvalidProdIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidProdIdsTableSQL")
+    property(name:"truncateInvalidSkuIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidSkuIdsTableSQL")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/commerce/catalog/custom/AncestorGeneratorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    journaling "true"
+    scheduler "/atg/dynamo/service/Scheduler"
+    name2 "DataSourceB"
+    name1 "DataSourceA"
+    liveDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/live/config}"
+    dataDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/data/config}"
+    stagingDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/staging/config}"
+    className "atg.vfs.switchable.SwitchableLocalFileSystem"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/epub/file/ConfigFileSystem.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/content/ContentManagementRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"accessControllers+",value: """/rest/model/atg/userprofiling/ProfileActor/logout=/atg/rest/userprofiling/LoggedInAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-success=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-error=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/rest/SessionConfirmationActor/getSessionConfirmationNumber=/atg/rest/userprofiling/AllAccessController""")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/servlet/dafpipeline/AccessControlServlet.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"switchableDataStores+",value: "/atg/dynamo/service/jdbc/SwitchingDataSource,/atg/epub/file/ConfigFileSystem")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/epub/DeploymentAgent.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    componentPath "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    className "atg.nucleus.GenericReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    CASHostName("endeca.docker-network")
+    EACPort("8888")
+    EACHostName("endeca.docker-network")
+    CASPort("8500")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/endeca/index/IndexingApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    locales "en,en_US"
+    languageMap "english=en"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/search/config/LanguageDimensionService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/tracking/UsageTrackingService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/tracking/UsageTrackingService")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/GSAInvalidatorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    clusterName "production"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/ClusterName.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_A")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/commerce/locations/LocationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_B")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/seo/SEORepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/servlet/dafpipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    defaultMdexPort "15000"
+    defaultMdexHostName "endeca-mdex1.docker-network"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/endeca/assembler/AssemblerApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    workbenchPort "8006"
+    workbenchHostName "endeca.docker-network"
+    baseApplicationName "ATG"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/endeca/ApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/userprofiling/PersonalizationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/dynamo/servlet/adminpipeline/AdminHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store01/localconfig/atg/multisite/SiteRepository.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "basic_production"
+    serverInstanceName "store01"
+    serverInstanceTypeId "production"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "store02"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    siteHttpServerPort "8080"
+    rmiPort "8860"
+    drpPort "8850"
+    fileDeploymentPort "8810"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    useLockServer "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/ClientLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    useLockServer "true"
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/ClientLockManager_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/repository/dynamic/DynamicMetadataRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/commerce/pricing/priceLists/PriceLists.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/commerce/catalog/ProductCatalog.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"updateProductCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductCatalogsSQL")
+    property(name:"updateProductParentCategoriesForCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductParentCategoriesForCatalogsSQL")
+    property(name:"truncateDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateDynamicProductsSQL")
+    property(name:"invalidatedSKUAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedSKUAssetIdsCountSQL")
+    property(name:"categoryChildSkusSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusSQL")
+    property(name:"prodsToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.prodsToInvalidateSQL")
+    property(name:"categoryChildProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsSQL")
+    property(name:"updateSkuCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuCatalogsSQL")
+    property(name:"skusToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.skusToInvalidateSQL")
+    property(name:"updateProductSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductSitesSQL")
+    property(name:"insertDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.insertDynamicProductsSQL")
+    property(name:"updateProductAncestorCategoriesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductAncestorCategoriesSQL")
+    alwaysWalkTree "false"
+    property(name:"categoryChildSkusWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusWithDynamicSQL")
+    property(name:"categoryChildProductsWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsWithDynamicSQL")
+    property(name:"updateSkuSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuSitesSQL")
+    property(name:"invalidatedProductAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedProductAssetIdsCountSQL")
+    property(name:"truncateInvalidProdIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidProdIdsTableSQL")
+    property(name:"truncateInvalidSkuIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidSkuIdsTableSQL")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/commerce/catalog/custom/AncestorGeneratorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    journaling "true"
+    scheduler "/atg/dynamo/service/Scheduler"
+    name2 "DataSourceB"
+    name1 "DataSourceA"
+    liveDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/live/config}"
+    dataDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/data/config}"
+    stagingDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/staging/config}"
+    className "atg.vfs.switchable.SwitchableLocalFileSystem"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/epub/file/ConfigFileSystem.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/content/ContentManagementRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"accessControllers+",value: """/rest/model/atg/userprofiling/ProfileActor/logout=/atg/rest/userprofiling/LoggedInAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-success=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-error=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/rest/SessionConfirmationActor/getSessionConfirmationNumber=/atg/rest/userprofiling/AllAccessController""")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/servlet/dafpipeline/AccessControlServlet.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"switchableDataStores+",value: "/atg/dynamo/service/jdbc/SwitchingDataSource,/atg/epub/file/ConfigFileSystem")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/epub/DeploymentAgent.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    componentPath "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    className "atg.nucleus.GenericReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    CASHostName("endeca.docker-network")
+    EACPort("8888")
+    EACHostName("endeca.docker-network")
+    CASPort("8500")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/endeca/index/IndexingApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    locales "en,en_US"
+    languageMap "english=en"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/search/config/LanguageDimensionService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/tracking/UsageTrackingService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/tracking/UsageTrackingService")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/GSAInvalidatorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    clusterName "production"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/ClusterName.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_A")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/commerce/locations/LocationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_B")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/seo/SEORepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/servlet/dafpipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    defaultMdexPort "15000"
+    defaultMdexHostName "endeca-mdex1.docker-network"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/endeca/assembler/AssemblerApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    workbenchPort "8006"
+    workbenchHostName "endeca.docker-network"
+    baseApplicationName "ATG"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/endeca/ApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/userprofiling/PersonalizationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/dynamo/servlet/adminpipeline/AdminHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/store02/localconfig/atg/multisite/SiteRepository.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "basic_production"
+    serverInstanceName "store02"
+    serverInstanceTypeId "production"
+  }
+  task(atg.cim.productconfig.serverinstance.ServerInstanceNameTask) {
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.serverinstance.PortBindingsSelectTask) {
+    serverInstanceName "aux"
+    portBindingsName "ports-default"
+    useDefault "true"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    httpPort "8080"
+    httpsPort "8443"
+    siteHttpServerPort "8080"
+    rmiPort "8860"
+    drpPort "8850"
+    fileDeploymentPort "8810"
+    property(name:"adminPort^",value: "/atg/dynamo/Configuration.httpPort")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/Configuration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    useLockServer "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/ClientLockManager.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    useLockServer "true"
+    lockServerAddress "lock1.docker-network"
+    lockServerPort "9012"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/ClientLockManager_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JPSConfigurationLocation("/opt/atg/ATG11.2/home/../home/security/jps-config.xml")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/server/OPSSInitializer.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/repository/dynamic/DynamicMetadataRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/commerce/pricing/priceLists/PriceLists.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/commerce/catalog/ProductCatalog.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"updateProductCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductCatalogsSQL")
+    property(name:"updateProductParentCategoriesForCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductParentCategoriesForCatalogsSQL")
+    property(name:"truncateDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateDynamicProductsSQL")
+    property(name:"invalidatedSKUAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedSKUAssetIdsCountSQL")
+    property(name:"categoryChildSkusSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusSQL")
+    property(name:"prodsToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.prodsToInvalidateSQL")
+    property(name:"categoryChildProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsSQL")
+    property(name:"updateSkuCatalogsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuCatalogsSQL")
+    property(name:"skusToInvalidateSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.skusToInvalidateSQL")
+    property(name:"updateProductSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductSitesSQL")
+    property(name:"insertDynamicProductsSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.insertDynamicProductsSQL")
+    property(name:"updateProductAncestorCategoriesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateProductAncestorCategoriesSQL")
+    alwaysWalkTree "false"
+    property(name:"categoryChildSkusWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildSkusWithDynamicSQL")
+    property(name:"categoryChildProductsWithDynamicSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.categoryChildProductsWithDynamicSQL")
+    property(name:"updateSkuSitesSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.updateSkuSitesSQL")
+    property(name:"invalidatedProductAssetIdsCountSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.invalidatedProductAssetIdsCountSQL")
+    property(name:"truncateInvalidProdIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidProdIdsTableSQL")
+    property(name:"truncateInvalidSkuIdsTableSQL^",value: "/atg/commerce/catalog/custom/CMSOracleSQLHolder.truncateInvalidSkuIdsTableSQL")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/commerce/catalog/custom/AncestorGeneratorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    journaling "true"
+    scheduler "/atg/dynamo/service/Scheduler"
+    name2 "DataSourceB"
+    name1 "DataSourceA"
+    liveDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/live/config}"
+    dataDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/data/config}"
+    stagingDirectory "{serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/staging/config}"
+    className "atg.vfs.switchable.SwitchableLocalFileSystem"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/epub/file/ConfigFileSystem.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/content/ContentManagementRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"accessControllers+",value: """/rest/model/atg/userprofiling/ProfileActor/logout=/atg/rest/userprofiling/LoggedInAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-success=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/userprofiling/ProfileActor/logout-error=/atg/rest/userprofiling/AllAccessController,\
+  /rest/model/atg/rest/SessionConfirmationActor/getSessionConfirmationNumber=/atg/rest/userprofiling/AllAccessController""")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/servlet/dafpipeline/AccessControlServlet.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"switchableDataStores+",value: "/atg/dynamo/service/jdbc/SwitchingDataSource,/atg/epub/file/ConfigFileSystem")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/epub/DeploymentAgent.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    componentPath "/atg/dynamo/service/jdbc/DirectJTDataSource"
+    className "atg.nucleus.GenericReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGProductionDS")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    CASHostName("endeca.docker-network")
+    EACPort("8888")
+    EACHostName("endeca.docker-network")
+    CASPort("8500")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/endeca/index/IndexingApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    locales "en,en_US"
+    languageMap "english=en"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/search/config/LanguageDimensionService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/tracking/UsageTrackingService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    property(name:"initialServices+",value: "/atg/tracking/UsageTrackingService")
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/Initial.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    enabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/GSAInvalidatorService.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    clusterName "production"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/ClusterName.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_A")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/commerce/locations/LocationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    JNDIName("java:/ATGSwitchingDS_B")
+    className "atg.nucleus.JNDIReference"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/seo/SEORepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/servlet/dafpipeline/DynamoHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    defaultMdexPort "15000"
+    defaultMdexHostName "endeca-mdex1.docker-network"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/endeca/assembler/AssemblerApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    workbenchPort "8006"
+    workbenchHostName "endeca.docker-network"
+    baseApplicationName "ATG"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/endeca/ApplicationConfiguration.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/userprofiling/PersonalizationRepository.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    metricUsageEnabled "true"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/dynamo/servlet/adminpipeline/AdminHandler.properties"
+  }
+  task(atg.cim.worker.common.MapPropertyFileCreatorTask) {
+    dataSource "/atg/dynamo/service/jdbc/SwitchingDataSource"
+    propertiesFile "/opt/atg/ATG11.2/home/../home/servers/aux/localconfig/atg/multisite/SiteRepository.properties"
+  }
+  task(atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask) {
+    serverInstancePatternId "basic_production"
+    serverInstanceName "aux"
+    serverInstanceTypeId "production"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "atg_production.ear"
+    serverInstanceId "basic_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "aux"
+    jbossServer "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "aux"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "atg_production.ear"
+    serverInstanceId "basic_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "aux"
+    jbossServer "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "aux"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "DafEar.Admin,DPS,DSS,ContentMgmt,DCS.PublishingAgent,ContentMgmt.Endeca.Index,DCS.Endeca.Index,REST,DCS.Endeca.Index.SKUIndexing,PublishingAgent"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "atg_production.ear"
+    serverInstanceName "aux"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "aux"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "aux"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_B"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATB"
+    password "CATB"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "aux"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_A"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATA"
+    password "CATA"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "aux"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "aux"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "aux"
+  }
+  task(atg.cim.productconfig.deploy.jboss.OptimizeJbossJVMTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    comment "CIM - Modifying JBoss JVM Memory Settings"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "atg_publishing.ear"
+    serverInstanceId "management_lock"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "bcc"
+    jbossServer "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "bcc"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "BIZUI,PubPortlet,DafEar.Admin,ContentMgmt.Versioned,DCS-UI.SiteAdmin.Versioned,SiteAdmin.Versioned,DCS.Versioned,ContentMgmt.Endeca.Index.Versioned,DCS.Endeca.Index.Versioned,DCS.Endeca.Index.SKUIndexing"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "atg_publishing.ear"
+    serverInstanceName "bcc"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "bcc"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "bcc"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_B"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATB"
+    password "CATB"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "bcc"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_A"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATA"
+    password "CATA"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "bcc"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGPublishingDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "PUB"
+    password "PUB"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "bcc"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "bcc"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "bcc"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "lock.ear"
+    serverInstanceId "lock_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "lock1"
+    jbossServer "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "lock1"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "DAS,DafEar.Admin"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "lock.ear"
+    serverInstanceName "lock1"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "lock1"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "lock1"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "lock1"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "lock1"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "lock.ear"
+    serverInstanceId "lock_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "lock2"
+    jbossServer "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "lock2"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "DAS,DafEar.Admin"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "lock.ear"
+    serverInstanceName "lock2"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "lock2"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "lock2"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "lock2"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "lock2"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "atg_production.ear"
+    serverInstanceId "basic_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "store01"
+    jbossServer "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "store01"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "DafEar.Admin,DPS,DSS,ContentMgmt,DCS.PublishingAgent,ContentMgmt.Endeca.Index,DCS.Endeca.Index,REST,DCS.Endeca.Index.SKUIndexing,PublishingAgent"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "atg_production.ear"
+    serverInstanceName "store01"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store01"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store01"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_B"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATB"
+    password "CATB"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store01"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_A"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATA"
+    password "CATA"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "store01"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "store01"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "store01"
+  }
+  task(atg.cim.productconfig.appassembly.EarFileNameTask) {
+    earFileName "atg_production.ear"
+    serverInstanceId "basic_production"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossServer "cim_create_server"
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    jbossTemplate "standalone.xml"
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask) {
+    serverInstanceName "store02"
+    jbossServer "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask) {
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    serverInstanceName "store02"
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+  }
+  task(atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask) {
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateServerLogNameTask) {
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask) {
+    moduleNames "DafEar.Admin,DPS,DSS,ContentMgmt,DCS.PublishingAgent,ContentMgmt.Endeca.Index,DCS.Endeca.Index,REST,DCS.Endeca.Index.SKUIndexing,PublishingAgent"
+    antFile "/opt/atg/ATG11.2/home/../CIM/plugins/Base/ant/cim-ant.xml"
+    earFileName "atg_production.ear"
+    serverInstanceName "store02"
+    path "/opt/jboss/jboss-eap-6.1/standalone/deployments/"
+    args "-jboss "
+    layerArg ""
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossEarDoDeployFileTask) {
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossUpdateDeploymentScannerConfigurationTask) {
+    serverInstanceName "store02"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store02"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGProductionDS"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CORE"
+    password "CORE"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "false"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store02"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_B"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATB"
+    password "CATB"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1/"
+    serverInstanceName "store02"
+    databaseType "oraclethin"
+    fileName "atg-ds.xml"
+    jndiName "ATGSwitchingDS_A"
+    url "jdbc:oracle:thin:@oracle.docker-network:1521:xe"
+    hostname "oracle.docker-network"
+    port "1521"
+    databaseName "xe"
+    driverClassName "oracle.jdbc.xa.client.OracleXADataSource"
+    username "CATA"
+    password "CATA"
+    driverName "ojdbc6.jar"
+    driverModule "com.oraclethin"
+    driverPool "oraclethin"
+    append "true"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "store02"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.JbossAddDriverClasspathEntryTask) {
+    jbossPath "/opt/jboss/jboss-eap-6.1"
+    serverInstanceName "store02"
+    driverPaths "/opt/ojdbc6.jar"
+  }
+  task(atg.cim.productconfig.deploy.jboss.CreateJbossDoDeployFileTask) {
+    filename "ojdbc6.jar"
+    serverInstanceName "store02"
+  }
+}
