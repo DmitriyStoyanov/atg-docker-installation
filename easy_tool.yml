@@ -1,0 +1,7 @@
+---
+- hosts: atg.docker-network
+  tasks:
+    - name: "Install python-setuptools"
+      package:
+        name: "python-setuptools"
+        state: "present"

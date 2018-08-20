@@ -9,13 +9,20 @@
       transport: "web"
       transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/app-servers/jboss-eap-6.1.0.zip"
 
-- name: "Install ATG 11.2 from web"
+- name: "Install ATG 11.2.0.2.1 from web"
   hosts: atg.docker-network
 
   roles:
     - role: lean_delivery.atg_platform
       transport: "web"
       transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/commerce/ATG11.2/ATG11.2/V78217-01.zip"
+    - role: lean_delivery.atg_platform_patching
+      transport: "web"
+      atg_patches:
+        - id: "11.2p2"
+          transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/commerce/ATG11.2/ATG11.2_patch/p24950065_112000_Generic.zip"
+        - id: "11.2p2.1"
+          transport_web: "https://touch.epm-esp.projects.epam.com/static-files/oracle-commerce-suite/commerce/ATG11.2/ATG11.2_patch/p25404313_112020_Generic.zip"
 
   vars:
     atg_version: "11.2"

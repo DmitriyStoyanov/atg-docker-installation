@@ -4,7 +4,7 @@
 - src: lean_delivery.java
 # Install lean_delivery.atg_platform role from Ansible Galaxy
 - src: lean_delivery.atg_platform
-# Install ansible-role-atg-csc from Github
-- name: lean_delivery.atg_csc
-  src: https://github.com/lean-delivery/ansible-role-atg-csc
-  version: origin/develop
+# Install lean_delivery.atg_platform_patching from Ansible Galaxy
+- src: lean_delivery.atg_platform_patching
+# Install lean_delivery/atg_csc from Ansible Galaxy
+- src: lean_delivery.atg_csc
