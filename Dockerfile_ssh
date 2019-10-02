@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:8
 
 RUN echo Update the image with the latest packages && \
 	yum update -y && \
